@@ -390,7 +390,7 @@ class XTB:
 
         values cmd:
         BUY	        0	buy
-        SELL	        1	sell
+        SELL	    1	sell
         BUY_LIMIT	2	buy limit
         SELL_LIMIT	3	sell limit
         BUY_STOP	4	buy stop

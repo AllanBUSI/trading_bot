@@ -16,13 +16,9 @@ def calculate_tp_sl(data, atr_multiplier_tp=1.2, atr_multiplier_sl=1, risk_toler
     # Calcul de l'Average True Range (ATR)
     atr = AverageTrueRange(high=data['high'], low=data['low'], close=data['close'], window=14)
     current_atr = atr.average_true_range().iloc[-1]
-
     # Calcul du dernier prix de clôture
     last_close = data['close'].iloc[-1]
-
     # Calcul de TP et SL selon la volatilité et la tolérance au risque
     tp = last_close + (current_atr * atr_multiplier_tp * risk_tolerance)
     sl = last_close - (current_atr * atr_multiplier_sl * risk_tolerance)
-
-    print("Take Profit:", tp, "Stop Loss:", sl)
     return tp, sl
