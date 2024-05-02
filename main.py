@@ -16,28 +16,32 @@ import schedule
 def main():
     
     currency = [
-        "BITCOIN", "ETHEREUM", "SOLANA",
+        "ETHEREUM"
     ]
-    for v in currency:    
-        
-        
+    for v in currency:  
         try:
             chemin_du_fichier = 'data/config.json'
-            data_config = read_json(chemin_du_fichier)
+            data_config = read_json(chemin_du_fichier)          
+            
             API = XTB(data_config['compte'], data_config["password"])
-            order = []
-            order, tp, sl, candle = candelier_order(["M30", "H1", "H4", "D1", "MN1"], order, v)
+            order, tp, sl = candelier_order(["M30"], 30, v)
             print("Take Profit:", tp/2, "Stop Loss:", sl/2)
-            has_duplicates, duplicates = count_duplicates(order)
             API = XTB(data_config['compte'], data_config["password"])
-            BuyOrder(API, duplicates, sl, tp, candle, v)
-        except:
-            print('Suivant')
-        
+            BuyOrder(API, order, sl, tp, v)
+            
+            API = XTB(data_config['compte'], data_config["password"])
+            order, tp, sl = candelier_order(["H4"], 30*8, v)
+            print("Take Profit:", tp/2, "Stop Loss:", sl/2)
+            API = XTB(data_config['compte'], data_config["password"])
+            BuyOrder(API, order, sl, tp, v)
+        except Exception as e:
+            print(e)
+            
+            
     
 
 if __name__ == "__main__":    
-    schedule.every(30).minutes.do(main)
+    schedule.every(1).minutes.do(main)
     print("Goooo")
     main()
     while True:
