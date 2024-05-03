@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from ta.volatility import AverageTrueRange
 
-def calculate_tp_sl(data, atr_multiplier_tp=1.2, atr_multiplier_sl=1, risk_tolerance=1):
+def calculate_tp_sl(data, atr_multiplier_tp=1, atr_multiplier_sl=1, risk_tolerance=0.9):
     """
     Calcule le Take Profit (TP) et le Stop Loss (SL) en utilisant l'ATR et la tolérance au risque.
 
@@ -14,11 +14,11 @@ def calculate_tp_sl(data, atr_multiplier_tp=1.2, atr_multiplier_sl=1, risk_toler
     """
     
     # Calcul de l'Average True Range (ATR)
-    atr = AverageTrueRange(high=data['high'], low=data['low'], close=data['close'], window=14)
+    atr = AverageTrueRange(high=data['high'], low=data['low'], close=data['close'], window=24)
     current_atr = atr.average_true_range().iloc[-1]
     # Calcul du dernier prix de clôture
     last_close = data['close'].iloc[-1]
     # Calcul de TP et SL selon la volatilité et la tolérance au risque
     tp = last_close + (current_atr * atr_multiplier_tp * risk_tolerance)
-    sl = last_close - (current_atr * atr_multiplier_sl * risk_tolerance)
+    sl = last_close - (current_atr * atr_multiplier_sl * risk_tolerance * 1.5)
     return tp, sl

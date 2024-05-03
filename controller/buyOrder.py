@@ -16,8 +16,8 @@ def BuyOrder(API, order, sl, tp, currency):
     
     if order == 'vente':
         print('Vente')
-        prixStopLoss = int(symbol['ask'] + sl)
-        prixTakeProfit = int(symbol['ask'] + tp)
+        prixStopLoss = int(symbol['ask'] + tp)
+        prixTakeProfit = int(symbol['ask'] + sl)
         list = API.make_Trade(symbol=currency, cmd=1,transaction_type=0,volume=0.1,comment="entrer "+currency,order=0, sl=prixStopLoss, tp=prixTakeProfit)
         return
 

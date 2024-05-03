@@ -102,6 +102,8 @@ class XTB:
                 "info": CHART_LAST_INFO_RECORD
             }
         }
+        
+        
         candles_json = json.dumps(candles)
         result = self.send(candles_json)
         result = json.loads(result)
