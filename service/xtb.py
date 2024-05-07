@@ -107,6 +107,9 @@ class XTB:
         candles_json = json.dumps(candles)
         result = self.send(candles_json)
         result = json.loads(result)
+        if result["returnData"] is None:
+            print(result)
+            return
         candles=[]
         candle={}
         qty=len(result["returnData"]["rateInfos"])

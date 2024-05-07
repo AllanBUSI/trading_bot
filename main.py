@@ -23,7 +23,7 @@ def main():
     ]
     
     for v in currency:  
-        try:
+        # try:
             chemin_du_fichier = 'data/config.json'
             data_config = read_json(chemin_du_fichier)          
             
@@ -55,8 +55,8 @@ def main():
             API = XTB(data_config['compte'], data_config["password"])
             BuyOrder(API, order, sl, tp, v)
 
-        except Exception as e:
-            print("d",e)
+        # except Exception as e:
+        #     print("d",e)
             
             
 
